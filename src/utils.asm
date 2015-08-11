@@ -10,15 +10,15 @@ print:
 	mov	rdi, 1
 	syscall
 	ret
-
+	
 println:
 	cmp	rsi, 0
 	jz	.skip_print
-	call print
+	call	print
 .skip_print:
 	mov	rdi, offset newline
 	mov	rsi, 1
-	call print
+	call	print
 	ret
 	
 #sys_exits with code. rdi: code
@@ -70,5 +70,6 @@ itoa:
 	.data
 newline:
 	.ascii 	"\n"
+	.bss
 numtext:
 	.space 32

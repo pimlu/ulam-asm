@@ -1,12 +1,15 @@
-	.global	_start
-
+	.global _start
+	.include "macros.asm"
+	
 	.text
 _start:
-	mov	rdi, offset magic
-	mov	rsi, offset magic_size
-	call	print
+	#check if they've put in valid args, store for later
+	call	read_args
+	mov	r8, rax
 	
-	mov	rdi, 1234
+	PRINT	argc_is
+	
+	mov	rdi, r8
 	call	itoa
 	mov	rdi, rax
 	mov	rsi, rdx
@@ -18,6 +21,4 @@ _start:
 	call	exit
 	
 	.data
-magic:
-	.ascii	"The magic number is: "
-	.set magic_size, .-magic
+	STRING 	argc_is, "argc is "

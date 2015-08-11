@@ -2,7 +2,7 @@ SOURCES=$(shell find src -name "*.asm")
 OBJECTS:=$(SOURCES:src/%.asm=build/%.o)
 EXECUTABLE=ulam
 
-ASFLAGS=-mmnemonic=intel -msyntax=intel -mnaked-reg
+ASFLAGS=-mmnemonic=intel -msyntax=intel -mnaked-reg -I src
 
 all: dist/$(EXECUTABLE)
 
