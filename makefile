@@ -3,11 +3,13 @@ OBJECTS:=$(SOURCES:src/%.asm=build/%.o)
 EXECUTABLE=ulam
 
 ASFLAGS=-mmnemonic=intel -msyntax=intel -mnaked-reg -I src
+LDFLAGS=
 
 all: dist/$(EXECUTABLE)
 
 debug: ASFLAGS += -g
-debug: dist/$(EXECUTABLE)
+strip: LDFLAGS += -s
+debug strip: dist/$(EXECUTABLE)
 
 dist/$(EXECUTABLE): $(OBJECTS) $(PARSEO)
 	@mkdir -p dist
