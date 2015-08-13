@@ -5,6 +5,8 @@
 _start:
 	#check if they've put in valid args, store for later
 	call	read_args
+	push	rax
+	push	rdx
 	mov	r8, rax
 	mov	r9, rdx
 	
@@ -16,6 +18,11 @@ _start:
 	PRINT	height_is
 	mov	rdi, r9
 	call	log_num
+	
+	pop	rsi
+	pop	rdi
+	mov	rdx, offset pound
+	call	txt_disp
 	
 	#exit 0
 	mov	rdi, 0

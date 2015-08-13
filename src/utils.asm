@@ -67,7 +67,7 @@ itoa:
 	dec	rcx
 	mov	[numtext + rcx], dl
 	jnz	.digit_loop
-.digit_break:
+	
 	#put the address of the text in rax
 	mov	rax, offset numtext
 	#return the length and restore rbx

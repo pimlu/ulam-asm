@@ -16,3 +16,7 @@
 	mov	rsi, offset size_\symbol
 	call	println
 .endm
+.macro PLN
+	mov	rsi, 0
+	call	println
+.endm
