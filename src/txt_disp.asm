@@ -5,24 +5,27 @@
 #draws a picture using the return values of a func.
 #params: rdi: w; rsi: h; rdx: func
 txt_disp:
-	#r[89]: x/y; r[ds]i: w/h; r10: func
 	mov	r8, rdi
 	mov	r9, rsi
 	mov	r10, rdx
+	#r[ds]i: x/y; r[89]: w/h; r10: func
 	
 	mov	rsi, 0
 #loop on x and y, printing r10() each time.
 .y_loop:
 	mov	rdi, 0
-	#push rsi and rdi for later since our calls overwrite them
+	push	rdi
 	push	rsi
 .x_loop:
+	#push rdi and rsi for later since our calls overwrite them
 	push	rdi
+	push	rsi
 	
 	call	r10
 	mov	[curchar], al
 	PRINT	curchar
 	
+	pop	rsi
 	pop	rdi
 	
 	inc	rdi
@@ -32,6 +35,7 @@ txt_disp:
 	PLN
 	
 	pop	rsi
+	pop	rdi
 	
 	inc	rsi
 	cmp	rsi, r9

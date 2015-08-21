@@ -21,7 +21,7 @@ _start:
 	
 	pop	rsi
 	pop	rdi
-	mov	rdx, offset pound
+	mov	rdx, offset circ
 	call	txt_disp
 	
 	#exit 0
