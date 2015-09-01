@@ -24,4 +24,4 @@ The binary will be located at `dist/ulam`.  It takes two arguments, the width an
 To build with debugging symbols, run `make debug`.  You may have to `make clean` first, if it's already been built without `debug`.
 
 ### Stripping Symbols
-To make a small binary with stripped symbols, run `make strip` after cleaning.  There is a `strip` branch which has some unnecessary bits removed to see how small it can be made.
+To make a small binary with stripped symbols, run `make strip` after cleaning.  There is a `strip` branch which has some unnecessary bits removed to see how small it can be made.  On my machine, it builds to 1088 bytes.  I'm sure it could be brought down to 1024 bytes.
