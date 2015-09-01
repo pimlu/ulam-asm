@@ -2,6 +2,17 @@
 
 This is an Ulam spiral generator for Linux written in x86-64 assembly.
 
+```
+pimlu@pimlu-vb ~/Documents/ulam $ ./dist/ulam 5 5
+width is: 5
+height is: 5
+#...#
+.#.#.
+#.o.#
+.#...
+..#..
+```
+
 ### Building
 Chances are all you need to do is run `make`.  This should build on any system that has GNU binutils installed (most well-known Linux distros) or a compatible alternative.
 
