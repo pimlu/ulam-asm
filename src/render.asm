@@ -1,9 +1,6 @@
-	.global pound, circ, ulam
+	.global ulam
 	
 	.text
-pound:
-	mov	rax, '#'
-	ret
 
 	
 .macro PUSHREGS
@@ -16,16 +13,8 @@ pound:
 	push	r9
 	push	r10
 	push	r11
-	push	r12
-	push	r13
-	push	r14
-	push	r15
 .endm
 .macro POPREGS
-	pop	r15
-	pop	r14
-	pop	r13
-	pop	r12
 	pop	r11
 	pop	r10
 	pop	r9
@@ -36,38 +25,6 @@ pound:
 	pop	rcx
 	pop	rbx
 .endm
-	
-#params: r[ds]i: x/y; r[89]: w/h;
-#returns: rax: char
-circ:
-	PUSHREGS
-	
-	#center coordinates based on w/h
-	mov	rax, r8
-	shr	rax
-	sub	rdi, rax
-	
-	mov	rax, r9
-	shr	rax
-	sub	rsi, rax
-	
-	#find the distance and compare it to a radius of 5
-	imul	rdi, rdi
-	imul	rsi, rsi
-	add	rdi, rsi
-	
-	mov	al, '.'
-	
-	cmp	rdi, 5*5
-	jge	.circ_empty
-	
-	mov	al, '#'
-	
-.circ_empty:	
-	
-	POPREGS
-	ret
-
 
 #params: r[ds]i: x/y; r[89]: w/h;
 #returns: rax: char
