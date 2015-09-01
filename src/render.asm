@@ -59,11 +59,11 @@ circ:
 	mov	al, '.'
 	
 	cmp	rdi, 5*5
-	jge	.circempty
+	jge	.circ_empty
 	
 	mov	al, '#'
 	
-.circempty:	
+.circ_empty:	
 	
 	POPREGS
 	ret
@@ -85,9 +85,27 @@ ulam:
 	
 	#rdi and rsi are center x and y
 	
+	#put an o at the center
+	mov	al, 'o'
+	mov	r10, rdi
+	or	r10, rsi
+	test	r10, r10
+	jz	.return
+	
+	#find out what number it is
 	call	spiral
 	
-	add	rax, '0'
+	#check if prime, and output a # if so
+	mov	rdi, rax
+	call	isprime
+	
+	test	rax, rax
+	mov	al, '.'
+	jz	.return
+	
+	mov	al, '#'
+	
+.return:
 	
 	POPREGS
 	ret
@@ -130,7 +148,7 @@ spiral:
 	mov	rdx, rdi
 	sub	rdx, rsi
 	cmp	rdx, 0
-	jg .skiphalf
+	jg	.skip_half
 #    ret--;
 	dec	r11
 #    ret *= -1;
@@ -138,7 +156,7 @@ spiral:
 #    sqr++;
 	inc	r10
 #  }
-.skiphalf:
+.skip_half:
 #  ret -= dist*2;
 	sub	r11, rbx
 #  ret += sqr*sqr;
@@ -149,3 +167,28 @@ spiral:
 #}
 	ret
 
+#rdi: n
+#rax: if it's prime
+isprime:
+	cmp	rdi, 2
+	jle	.composite
+	
+	mov	rcx, 2
+.div_loop:
+	
+	mov	rax, rdi
+	mov	rdx, 0
+	idiv	rcx
+	
+	test	rdx, rdx
+	jz	.composite
+	
+	inc	rcx
+	cmp	rcx, rdi
+	jne	.div_loop
+	
+	mov	rax, 1
+	ret
+.composite:
+	mov	rax, 0
+	ret
