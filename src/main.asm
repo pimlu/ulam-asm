@@ -21,7 +21,7 @@ _start:
 	
 	pop	rsi
 	pop	rdi
-	mov	rdx, offset circ
+	mov	rdx, offset ulam
 	call	txt_disp
 	
 	#exit 0
