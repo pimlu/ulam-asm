@@ -171,7 +171,8 @@ spiral:
 #rax: if it's prime
 isprime:
 	cmp	rdi, 2
-	jle	.composite
+	jl	.composite
+	je	.prime
 	
 	mov	rcx, 2
 .div_loop:
@@ -186,7 +187,7 @@ isprime:
 	inc	rcx
 	cmp	rcx, rdi
 	jne	.div_loop
-	
+.prime:
 	mov	rax, 1
 	ret
 .composite:
